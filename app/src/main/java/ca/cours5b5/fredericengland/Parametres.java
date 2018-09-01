@@ -6,10 +6,10 @@ import android.util.Log;
 
 public class Parametres extends AppCompatActivity {
 
-    @Override
+    //@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parametres);
-        Log.d("MonEtiquette","Bonjour!");
+        Log.d("MonEtiquette",this.getResources().getString(R.string.AcceuilBonjour));
     }
 }

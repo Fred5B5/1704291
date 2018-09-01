@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">FredericEngland</string>
+    <string name="AcceuilBonjour">Bonjour!</string>
+    <string name="BonjourPortrait">Bonjour portrait!</string>
+    <string name="BonjourPaysage">Bonjour paysage!</string>
 </resources>

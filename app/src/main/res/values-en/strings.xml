@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="AcceuilBonjour">Hello!</string>
+    <string name="BonjourPortrait">Hello portrait!</string>
+    <string name="BonjourPaysage">Hello landscape!</string>
+</resources>

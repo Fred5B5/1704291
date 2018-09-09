@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ca.cours5b5.fredericengland.vues.VParametres xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/spn_pourgagner"
+        android:layout_width="222dp"
+        android:layout_height="24dp"
+        android:layout_marginBottom="221dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="31dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_pourgagner"
+        app:layout_constraintTop_toBottomOf="@+id/spn_largeur" />
+
+    <Spinner
+        android:id="@+id/spn_largeur"
+        android:layout_width="222dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        app:layout_constraintBottom_toTopOf="@+id/spn_hauteur"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_largeur"
+        app:layout_constraintTop_toBottomOf="@+id/spn_pourgagner" />
+
+    <Spinner
+        android:id="@+id/spn_hauteur"
+        android:layout_width="222dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="171dp"
+        app:layout_constraintBottom_toTopOf="@+id/spn_largeur"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_hauteur"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_hauteur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="171dp"
+        android:text="@string/txt_Hauteur"
+        app:layout_constraintBottom_toTopOf="@+id/txt_largeur"
+        app:layout_constraintEnd_toStartOf="@+id/spn_hauteur"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_largeur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="11dp"
+        android:text="@string/txt_Largeur"
+        app:layout_constraintBottom_toTopOf="@+id/txt_pourgagner"
+        app:layout_constraintEnd_toStartOf="@+id/spn_largeur"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_hauteur" />
+
+    <TextView
+        android:id="@+id/txt_pourgagner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="221dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="31dp"
+        android:text="@string/txt_PourGagner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/spn_pourgagner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_largeur" />
+</ca.cours5b5.fredericengland.vues.VParametres>

@@ -6,11 +6,18 @@ import android.util.Log;
 
 import ca.cours5b5.fredericengland.R;
 
-public class AParametres extends AppCompatActivity {
+public class AParametres extends Activite {
+
+    static {
+        Class currentClass = new Object() { }.getClass().getEnclosingClass();
+        Log.i("MyApp",currentClass.getSimpleName() + "::static");
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.vxml_parametres);
+
 
     }
 }

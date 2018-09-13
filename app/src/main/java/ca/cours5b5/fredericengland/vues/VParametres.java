@@ -1,14 +1,19 @@
 package ca.cours5b5.fredericengland.vues;
 
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import ca.cours5b5.fredericengland.R;
 
-public class VParametres extends ConstraintLayout {
+public class VParametres extends Vue {
+
+    static {
+        Class currentClass = new Object() { }.getClass().getEnclosingClass();
+        Log.i("MyApp",currentClass.getSimpleName() + "::static");
+    }
 
     public VParametres (Context context) {
 
@@ -28,7 +33,6 @@ public class VParametres extends ConstraintLayout {
 
     }
 
-    @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
 

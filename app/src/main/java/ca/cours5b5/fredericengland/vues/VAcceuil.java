@@ -1,12 +1,15 @@
 package ca.cours5b5.fredericengland.vues;
 
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
+import android.util.Log;
 
-import ca.cours5b5.fredericengland.R;
+public class VAcceuil extends Vue {
 
-public class VAcceuil extends ConstraintLayout {
+    static {
+        Class currentClass = new Object() { }.getClass().getEnclosingClass();
+        Log.i("MyApp",currentClass.getSimpleName() + "::static");
+    }
 
     public VAcceuil (Context context) {
 

@@ -29,7 +29,6 @@ public class AAcceuil extends Activite {
                 Intent monIntent = new Intent(AAcceuil.this, AParametres.class);
                 startActivity(monIntent);
 
-
             }
 
         });

@@ -2,5 +2,6 @@
 <resources>
 
     <string name="bouton_parametres">Parameters</string>
+    <string name="bouton_jouer">Play</string>
 
 </resources>

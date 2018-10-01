@@ -32,6 +32,19 @@ public class AAcceuil extends Activite {
             }
 
         });
+
+        Button boutonsJouer = this.findViewById(R.id.btn_jouer);
+        boutonsParametres.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick (View v) {
+
+                Intent monIntent = new Intent(AAcceuil.this, APartie.class);
+                startActivity(monIntent);
+
+            }
+
+        });
     }
 
 }

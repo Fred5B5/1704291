@@ -1,5 +1,7 @@
 package ca.cours5b5.fredericengland.controleurs;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,13 +46,20 @@ public class ControleurAction {
 
     private static void executerActionsExecutables() {
 
+        Class currentClass = new Object() { }.getClass().getEnclosingClass();
+        Log.i("MyApp",currentClass.getSimpleName() + "::executerActionsExecutables");
+
         for (Action action : fileAttenteExecution ) {
 
-            executerMaintenant(action);
+            if (siActionExecutable(action)) {
 
-            lancerObservationSiApplicable(action);
+                executerMaintenant(action);
 
-            fileAttenteExecution.remove(0);
+                lancerObservationSiApplicable(action);
+
+                fileAttenteExecution.remove(0);
+
+            }
 
         }
 
@@ -64,6 +73,9 @@ public class ControleurAction {
 
     static void executerDesQuePossible(Action action){
 
+        Class currentClass = new Object() { }.getClass().getEnclosingClass();
+        Log.i("MyApp",currentClass.getSimpleName() + "::executerDesQuePossible");
+
         ajouterActionEnFileDAttente(action);
 
         executerActionsExecutables();
@@ -71,6 +83,9 @@ public class ControleurAction {
     }
 
     private static synchronized void executerMaintenant (Action action){
+
+        Class currentClass = new Object() { }.getClass().getEnclosingClass();
+        Log.i("MyApp",currentClass.getSimpleName() + "::executerMaintenant");
 
         action.listenerFournisseur.executer(action.args);
 

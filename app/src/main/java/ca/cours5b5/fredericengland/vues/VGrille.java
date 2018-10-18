@@ -62,6 +62,8 @@ public class VGrille extends GridLayout {
             @Override
             public void onClick(View view) {
 
+                Log.i("MyApp",getClass().getSimpleName() + ".onClick");
+
                 demanderActionEntete();
 
                 jouerJeton.setArguments(colonne);

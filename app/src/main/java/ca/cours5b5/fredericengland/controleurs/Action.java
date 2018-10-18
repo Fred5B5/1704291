@@ -1,5 +1,7 @@
 package ca.cours5b5.fredericengland.controleurs;
 
+import android.util.Log;
+
 import ca.cours5b5.fredericengland.controleurs.interfaces.Fournisseur;
 import ca.cours5b5.fredericengland.controleurs.interfaces.ListenerFournisseur;
 
@@ -18,6 +20,8 @@ public class Action {
     }
 
     public void executerDesQuePossible(){
+
+        Log.i("MyApp",getClass().getSimpleName() + ".executerDesQuePossible");
 
         ControleurAction.executerDesQuePossible(this);
 

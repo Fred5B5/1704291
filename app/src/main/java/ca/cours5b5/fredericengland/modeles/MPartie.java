@@ -1,5 +1,7 @@
 package ca.cours5b5.fredericengland.modeles;
 
+import android.util.Log;
+
 import java.util.Map;
 
 import ca.cours5b5.fredericengland.controleurs.ControleurAction;
@@ -34,6 +36,8 @@ public class MPartie extends Modele implements Fournisseur {
         ControleurAction.fournirAction(this, GCommande.JOUER_COUP_ICI, new ListenerFournisseur() {
                     @Override
                     public void executer(Object... args) {
+
+                        Log.i("MyApp",getClass().getSimpleName() + "::executer");
 
                         jouerCoup((int) args[0]);
 

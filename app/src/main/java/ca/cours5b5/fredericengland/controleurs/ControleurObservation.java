@@ -20,6 +20,8 @@ public class ControleurObservation {
     static {
 
         observations = new HashMap<>();
+        Class currentClass = new Object() { }.getClass().getEnclosingClass();
+        Log.i("MyApp",currentClass.getSimpleName() + "::observerModele");
 
     }
 

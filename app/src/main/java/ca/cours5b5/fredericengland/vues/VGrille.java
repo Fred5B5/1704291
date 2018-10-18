@@ -34,7 +34,6 @@ public class VGrille extends GridLayout {
 
     private VCase[][] lesCases;
 
-    @Override
     protected void onFinishInflate(){
 
         super.onFinishInflate();

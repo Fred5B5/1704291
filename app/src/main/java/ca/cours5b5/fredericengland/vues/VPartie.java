@@ -33,7 +33,6 @@ public class VPartie extends Vue {
 
     }
 
-    @Override
     protected void onFinishInflate() {
 
         super.onFinishInflate();
@@ -49,6 +48,8 @@ public class VPartie extends Vue {
         ControleurObservation.observerModele(MPartie.class.getSimpleName(), new ListenerObservateur() {
             @Override
             public void reagirNouveauModele(Modele modele) {
+
+                Log.i("MyApp",getClass().getSimpleName() + "::reagirNouveauModele");
 
                 super.reagirNouveauModele(modele);
 

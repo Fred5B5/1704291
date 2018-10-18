@@ -2,12 +2,17 @@ package ca.cours5b5.fredericengland.vues;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.GridLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.cours5b5.fredericengland.controleurs.Action;
+import ca.cours5b5.fredericengland.controleurs.ControleurAction;
+import ca.cours5b5.fredericengland.global.GCommande;
 import ca.cours5b5.fredericengland.global.GCouleur;
 import ca.cours5b5.fredericengland.modeles.MGrille;
 
@@ -35,6 +40,8 @@ public class VGrille extends GridLayout {
 
     private List<VEntete> entetes;
 
+    private Action jouerJeton;
+
     private VCase[][] lesCases;
 
     protected void onFinishInflate(){
@@ -45,17 +52,41 @@ public class VGrille extends GridLayout {
 
     private void demanderActionEntete(){
 
+        jouerJeton = ControleurAction.demanderAction(GCommande.JOUER_COUP_ICI);
+
     }
 
     private void installerListenerEntete(VEntete entete, final int colonne){
+
+        entete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                demanderActionEntete();
+
+                jouerJeton.setArguments(colonne);
+                jouerJeton.executerDesQuePossible();
+
+            }
+        });
 
     }
 
     void afficherJetons(MGrille grille){
 
+        for(int i = 0; i < grille.getColonnes().size(); i++){
+            for(int i2 = 0; i2 < grille.getColonnes().get(i).getJetons().size(); i2++){
+
+                afficherJeton( lesCases.length - 1 - i2, i, grille.getColonnes().get(i).getJetons().get(i2));
+
+            }
+        }
+
     }
 
     private void afficherJeton(int colonne, int rangee, GCouleur jeton){
+
+        this.lesCases[colonne][rangee].afficherJeton(jeton);
 
     }
 
@@ -88,6 +119,8 @@ public class VGrille extends GridLayout {
             this.entetes.add(new VEntete(getContext(), i));
 
             addView(entetes.get(entetes.size() - 1), getMiseEnPageEntete(i));
+
+            installerListenerEntete(entetes.get(entetes.size() - 1), i);
 
         }
 

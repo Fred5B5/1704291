@@ -10,7 +10,7 @@ public class ErreurObservation extends RuntimeException {
 
     public ErreurObservation ( String message ) {
 
-
+        super(message);
 
     }
 

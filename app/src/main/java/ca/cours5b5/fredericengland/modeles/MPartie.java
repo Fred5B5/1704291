@@ -2,11 +2,15 @@ package ca.cours5b5.fredericengland.modeles;
 
 import java.util.Map;
 
+import ca.cours5b5.fredericengland.controleurs.ControleurAction;
+import ca.cours5b5.fredericengland.controleurs.interfaces.Fournisseur;
+import ca.cours5b5.fredericengland.controleurs.interfaces.ListenerFournisseur;
 import ca.cours5b5.fredericengland.exceptions.ErreurDeSerialisation;
+import ca.cours5b5.fredericengland.global.GCommande;
 import ca.cours5b5.fredericengland.global.GCouleur;
 import ca.cours5b5.fredericengland.serialisation.AttributSerialisable;
 
-public class MPartie extends Modele {
+public class MPartie extends Modele implements Fournisseur {
 
     @AttributSerialisable
     public MParametresPartie parametres;
@@ -21,31 +25,54 @@ public class MPartie extends Modele {
 
     private void initialiserCouleurCourante () {
 
-
+        this.couleurCourante = GCouleur.ROUGE;
 
     }
 
     private void fournirActionPlacerJeton() {
 
+        ControleurAction.fournirAction(this, GCommande.JOUER_COUP_ICI, new ListenerFournisseur() {
+                    @Override
+                    public void executer(Object... args) {
 
+                        jouerCoup((int) args[0]);
+
+                    }
+                });
 
     }
 
     protected void jouerCoup(int colonne) {
 
+        grille.placerJeton(colonne, couleurCourante);
 
+        prochaineCouleurCourante();
 
     }
 
     private void prochaineCouleurCourante() {
 
+        if (this.couleurCourante != GCouleur.ROUGE) {
 
+            this.couleurCourante = GCouleur.ROUGE;
+
+        } else {
+
+            this.couleurCourante = GCouleur.JAUNE;
+
+        }
 
     }
 
     public MPartie (MParametresPartie parametres){
 
         this.parametres = parametres;
+
+        this.grille = new MGrille(parametres.getLargeur());
+
+        fournirActionPlacerJeton();
+
+        initialiserCouleurCourante();
 
     }
 

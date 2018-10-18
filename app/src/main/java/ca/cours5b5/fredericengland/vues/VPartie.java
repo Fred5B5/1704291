@@ -51,9 +51,9 @@ public class VPartie extends Vue {
 
                 Log.i("MyApp",getClass().getSimpleName() + "::reagirNouveauModele");
 
-                super.reagirNouveauModele(modele);
-
                 initialiserGrille((MPartie) modele);
+
+                super.reagirNouveauModele(modele);
 
             }
             @Override
@@ -68,7 +68,7 @@ public class VPartie extends Vue {
 
     private void miseAJourGrille(MPartie partie){
 
-
+        grille.afficherJetons(partie.getGrille());
 
     }
 

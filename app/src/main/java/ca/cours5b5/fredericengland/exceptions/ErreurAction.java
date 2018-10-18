@@ -1,8 +1,10 @@
 package ca.cours5b5.fredericengland.exceptions;
 
-public class ErreurAction {
+public class ErreurAction extends RuntimeException {
 
     public ErreurAction(String message) {
+
+        super(message);
 
     }
 

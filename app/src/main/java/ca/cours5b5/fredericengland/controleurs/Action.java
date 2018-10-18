@@ -9,21 +9,23 @@ public class Action {
 
     ListenerFournisseur listenerFournisseur;
 
-    //TODO CHANGER CA ARGS 2x
-
     Object[] args;
 
-    public void setArguments(Object args){
+    public void setArguments(Object... args){
+
+        this.args = args;
 
     }
 
     public void executerDesQuePossible(){
 
-
+        ControleurAction.executerDesQuePossible(this);
 
     }
 
     Action cloner() {
+
+        return this.cloner();
 
     }
 

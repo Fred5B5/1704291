@@ -27,7 +27,13 @@ public class ControleurObservation {
 
     public static void lancerObservation (Modele modele) {
 
+        ListenerObservateur ListenerObservateur = observations.get(modele);
 
+        if (ListenerObservateur != null ){
+
+            ListenerObservateur.reagirChangementAuModele(modele);
+
+        }
 
     }
 

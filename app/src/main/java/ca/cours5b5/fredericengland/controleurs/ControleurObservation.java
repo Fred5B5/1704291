@@ -25,6 +25,12 @@ public class ControleurObservation {
 
     }
 
+    public static void lancerObservation (Modele modele) {
+
+
+
+    }
+
     public static void observerModele ( String nomModele, final ListenerObservateur listenerObservateur) {
 
             partie = new MPartie( MParametresPartie.aPartirMParametres(MParametres.instance) );

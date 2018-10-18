@@ -59,8 +59,16 @@ public class VPartie extends Vue {
             @Override
             public void reagirChangementAuModele(Modele modele) {
 
+                miseAJourGrille((MPartie) modele);
+
             }
         });
+
+    }
+
+    private void miseAJourGrille(MPartie partie){
+
+
 
     }
 

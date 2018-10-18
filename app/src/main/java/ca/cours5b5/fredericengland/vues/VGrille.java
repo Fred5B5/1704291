@@ -8,6 +8,9 @@ import android.widget.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.cours5b5.fredericengland.global.GCouleur;
+import ca.cours5b5.fredericengland.modeles.MGrille;
+
 public class VGrille extends GridLayout {
 
     public VGrille (Context context) {
@@ -37,6 +40,22 @@ public class VGrille extends GridLayout {
     protected void onFinishInflate(){
 
         super.onFinishInflate();
+
+    }
+
+    private void demanderActionEntete(){
+
+    }
+
+    private void installerListenerEntete(VEntete entete, final int colonne){
+
+    }
+
+    void afficherJetons(MGrille grille){
+
+    }
+
+    private void afficherJeton(int colonne, int rangee, GCouleur jeton){
 
     }
 

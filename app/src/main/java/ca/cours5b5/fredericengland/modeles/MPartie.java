@@ -13,6 +13,10 @@ public class MPartie extends Modele {
 
     public MPartie (MParametresPartie parametres){
 
+        this.parametres = parametres;
+
+
+
     }
 
     public MParametresPartie getParametres(){

@@ -3,6 +3,8 @@ package ca.cours5b5.fredericengland.activites;
 import android.os.Bundle;
 
 import ca.cours5b5.fredericengland.R;
+import ca.cours5b5.fredericengland.modeles.MParametres;
+import ca.cours5b5.fredericengland.modeles.MPartie;
 
 public class APartie extends Activite {
 

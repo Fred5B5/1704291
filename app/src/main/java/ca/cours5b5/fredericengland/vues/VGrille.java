@@ -51,6 +51,8 @@ public class VGrille extends GridLayout {
 
         ajouterCases(hauteur, largeur);
 
+
+
     }
 
     private void initialiserTableauDeCases(int hauteur, int largeur){
@@ -66,6 +68,8 @@ public class VGrille extends GridLayout {
         for ( int i = 0; i < largeur; i++ ) {
 
             this.entetes.add(new VEntete(getContext(), i));
+
+            addView(entetes.get(entetes.size() - 1), getMiseEnPageEntete(i));
 
         }
 
@@ -106,7 +110,9 @@ public class VGrille extends GridLayout {
 
             for ( int i2 = 0; i2 < largeur; i2++ ) {
 
-                lesCases[i][i2] = new VCase(getContext(), i, i2);
+                lesCases[i][i2] = new VCase(getContext(), hauteur - i - 1, i2);
+
+                addView(lesCases[i][i2], getMiseEnPageCase(i + 1, i2));
 
             }
 
@@ -116,9 +122,9 @@ public class VGrille extends GridLayout {
 
     private LayoutParams getMiseEnPageCase(int rangee, int colonne){
 
-        float poidsRangee = 0;
+        float poidsRangee = 1;
 
-        float poidsColonne = 0;
+        float poidsColonne = 1;
 
 
         Spec specColonne = GridLayout.spec(colonne, poidsRangee);

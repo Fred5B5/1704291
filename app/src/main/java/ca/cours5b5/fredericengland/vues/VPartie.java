@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 
+import ca.cours5b5.fredericengland.R;
 import ca.cours5b5.fredericengland.controleurs.ControleurObservation;
 import ca.cours5b5.fredericengland.controleurs.interfaces.ListenerObservateur;
 import ca.cours5b5.fredericengland.modeles.MParametres;
@@ -37,17 +38,25 @@ public class VPartie extends Vue {
 
         super.onFinishInflate();
 
+        this.grille = this.findViewById(R.id.gridlayout_Partie);
+
         observerPartie();
 
     }
 
     private void observerPartie(){
 
-        ControleurObservation.observerModele(MParametres.class.getSimpleName(), new ListenerObservateur() {
+        ControleurObservation.observerModele(MPartie.class.getSimpleName(), new ListenerObservateur() {
+            @Override
+            public void reagirNouveauModele(Modele modele) {
+
+                super.reagirNouveauModele(modele);
+
+                initialiserGrille((MPartie) modele);
+
+            }
             @Override
             public void reagirChangementAuModele(Modele modele) {
-
-
 
             }
         });
@@ -62,7 +71,7 @@ public class VPartie extends Vue {
 
     private void initialiserGrille(MPartie partie){
 
-
+        this.grille.creerGrille(partie.parametres.hauteur, partie.parametres.largeur);
 
     }
 

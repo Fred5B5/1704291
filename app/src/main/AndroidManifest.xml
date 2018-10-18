@@ -20,6 +20,10 @@
             android:name=".activites.AParametres"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".activites.APartie"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ca.cours5b5.fredericengland.exceptions.ErreurDeSerialisation;
+import ca.cours5b5.fredericengland.global.GConstantes;
 import ca.cours5b5.fredericengland.serialisation.AttributSerialisable;
 
 public class MParametresPartie extends Modele {
@@ -23,8 +24,6 @@ public class MParametresPartie extends Modele {
     public static MParametresPartie aPartirMParametres ( MParametres mParametres ) {
 
         MParametresPartie parametresPartieCloner = new MParametresPartie();
-
-        //TODO CHANGE STATIC FIELD USED AS PARAMETERS
 
         parametresPartieCloner.hauteur = mParametres.getHauteur();
         parametresPartieCloner.largeur = mParametres.getLargeur();
@@ -47,6 +46,10 @@ public class MParametresPartie extends Modele {
     }
 
     public MParametresPartie() {
+
+        hauteur = GConstantes.hauteurDeBase;
+        largeur = GConstantes.largeurDeBase;
+        pourGagner = GConstantes.pourGagnerDeBase;
 
     }
 

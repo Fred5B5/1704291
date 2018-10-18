@@ -34,7 +34,7 @@ public class AAcceuil extends Activite {
         });
 
         Button boutonsJouer = this.findViewById(R.id.btn_jouer);
-        boutonsParametres.setOnClickListener(new View.OnClickListener() {
+        boutonsJouer.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick (View v) {

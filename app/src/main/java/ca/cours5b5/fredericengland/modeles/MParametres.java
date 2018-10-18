@@ -24,6 +24,22 @@ public class MParametres extends Modele {
     public Integer pourGagner = GConstantes.pourGagnerDeBase;
     private final String __pourGagner = "pourGagner";
 
+    public Integer getHauteur () {
+
+        return this.hauteur;
+
+    }
+    public Integer getLargeur () {
+
+        return this.largeur;
+
+    }
+    public Integer getPourGagner () {
+
+        return this.pourGagner;
+
+    }
+
     public List<Integer> getChoixHauteur(){
 
         List<Integer> choixHauteur = new ArrayList<>();

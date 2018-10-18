@@ -6,7 +6,7 @@ public abstract class ListenerObservateur {
 
     public void reagirNouveauModele ( Modele modele) {
 
-
+        reagirChangementAuModele(modele);
 
     }
 

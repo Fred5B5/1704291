@@ -24,7 +24,13 @@ public class VCase extends AppCompatButton {
 
     }
 
-    public VCase(Context context, int ragee, int colonne){
+    public VCase(Context context, int rangee, int colonne){
+
+        super(context);
+
+        String texte = rangee + "," + colonne;
+
+        setText(texte);
 
     }
 

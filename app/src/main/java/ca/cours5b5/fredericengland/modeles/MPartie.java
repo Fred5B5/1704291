@@ -17,6 +17,8 @@ public class MPartie extends Modele {
 
     public MParametresPartie getParametres(){
 
+        return this.parametres;
+
     }
 
     @Override
@@ -26,6 +28,8 @@ public class MPartie extends Modele {
 
     @Override
     public Map<String, Object> enObjectJson() throws ErreurDeSerialisation {
+
+        return null;
 
     }
 

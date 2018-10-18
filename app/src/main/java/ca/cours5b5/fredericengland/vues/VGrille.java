@@ -2,6 +2,7 @@ package ca.cours5b5.fredericengland.vues;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.widget.GridLayout;
 
 import java.util.ArrayList;
@@ -33,12 +34,6 @@ public class VGrille extends GridLayout {
 
     private VCase[][] lesCases;
 
-    private class Colonne extends ArrayList<VCase> {
-
-    }
-
-    private List<Colonne> colonnesDeCases;
-
     @Override
     protected void onFinishInflate(){
 
@@ -48,25 +43,103 @@ public class VGrille extends GridLayout {
 
     void creerGrille(int hauteur, int largeur){
 
+        this.nombreRangees = hauteur;
+
+        initialiserTableauDeCases(hauteur, largeur);
+
+        ajouterEnTetes(largeur);
+
+        ajouterCases(hauteur, largeur);
+
     }
 
     private void initialiserTableauDeCases(int hauteur, int largeur){
 
-    }
-
-    private void initialiserColonnes(int largeur){
+        this.lesCases = new VCase[hauteur][largeur];
 
     }
 
-    private void LayoutParams getMiseEnPageEntete(int colonne){
+    private void ajouterEnTetes(int largeur) {
+
+        this.entetes = new ArrayList<>();
+
+        for ( int i = 0; i < largeur; i++ ) {
+
+            this.entetes.add(new VEntete(getContext(), i));
+
+        }
+
+    }
+
+    private LayoutParams getMiseEnPageEntete(int colonne){
+
+        float poidsRangee = 2;
+
+        float poidsColonne = 2;
+
+
+        Spec specColonne = GridLayout.spec(colonne, poidsRangee);
+
+        Spec specRangee = GridLayout.spec(0, poidsColonne);
+
+
+        LayoutParams layout = new LayoutParams(specRangee, specColonne);
+
+
+        layout.width = 0;
+
+        layout.height = 0;
+
+        layout.setGravity(Gravity.FILL);
+
+        layout.rightMargin = 5;
+
+        layout.leftMargin = 5;
+
+        return layout;
 
     }
 
     private void ajouterCases(int hauteur, int largeur){
-        
+
+        for ( int i = 0; i < hauteur; i++ ) {
+
+            for ( int i2 = 0; i2 < largeur; i2++ ) {
+
+                lesCases[i][i2] = new VCase(getContext(), i, i2);
+
+            }
+
+        }
+
     }
 
-    private void LayoutParams getMiseEnPageCase(int rangee, int colonne){
+    private LayoutParams getMiseEnPageCase(int rangee, int colonne){
+
+        float poidsRangee = 0;
+
+        float poidsColonne = 0;
+
+
+        Spec specColonne = GridLayout.spec(colonne, poidsRangee);
+
+        Spec specRangee = GridLayout.spec(rangee, poidsColonne);
+
+
+        LayoutParams layout = new LayoutParams(specRangee, specColonne);
+
+
+        layout.width = 0;
+
+        layout.height = 0;
+
+        layout.setGravity(Gravity.FILL);
+
+        layout.rightMargin = 5;
+
+        layout.leftMargin = 5;
+
+        return layout;
 
     }
 

@@ -50,7 +50,7 @@ public class VParametres extends Vue {
 
         spn_hauteur.setAdapter(adapter_hauteur);
 
-        spn_hauteur.setSelection(MParametres.instance.hauteur - GConstantes.hauteurMin);
+        spn_hauteur.setSelection(MParametres.instance.getHauteur() - GConstantes.hauteurMin);
 
         Spinner spn_largeur = this.findViewById(R.id.spn_largeur);
         ArrayList<Integer> choixLargeur = (ArrayList<Integer>) MParametres.instance.getChoixLargeur();
@@ -60,7 +60,7 @@ public class VParametres extends Vue {
 
         spn_largeur.setAdapter(adapter_largeur);
 
-        spn_largeur.setSelection(MParametres.instance.largeur - GConstantes.largeurMin);
+        spn_largeur.setSelection(MParametres.instance.getLargeur() - GConstantes.largeurMin);
 
         Spinner spn_pourgagner = this.findViewById(R.id.spn_pourgagner);
         ArrayList<Integer> choixPourGagner = (ArrayList<Integer>) MParametres.instance.getChoixPourGagner();
@@ -70,7 +70,7 @@ public class VParametres extends Vue {
 
         spn_pourgagner.setAdapter(adapter_PourGagner);
 
-        spn_pourgagner.setSelection(MParametres.instance.pourGagner - GConstantes.pourGagnerMin);
+        spn_pourgagner.setSelection(MParametres.instance.getPourGagner() - GConstantes.pourGagnerMin);
 
 
         spn_hauteur.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

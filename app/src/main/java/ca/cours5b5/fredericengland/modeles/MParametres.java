@@ -12,17 +12,11 @@ public class MParametres extends Modele {
 
     public static MParametres instance = new MParametres();
 
-    @AttributSerialisable
-    public Integer hauteur = GConstantes.hauteurDeBase;
-    private final String __hauteur = "hauteur";
+    private Integer hauteur = GConstantes.hauteurDeBase;
 
-    @AttributSerialisable
-    public Integer largeur = GConstantes.largeurDeBase;
-    private final String __largeur = "largeur";
+    private Integer largeur = GConstantes.largeurDeBase;
 
-    @AttributSerialisable
-    public Integer pourGagner = GConstantes.pourGagnerDeBase;
-    private final String __pourGagner = "pourGagner";
+    private Integer pourGagner = GConstantes.pourGagnerDeBase;
 
     public Integer getHauteur () {
 
@@ -96,38 +90,12 @@ public class MParametres extends Modele {
     @Override
     public void aPartirObjectJson(Map<String, Object>objectJson){
 
-        for(Map.Entry<String, Object> entry:objectJson.entrySet()) {
-
-            if (entry.getKey().equals("__hauteur")){
-
-                hauteur = Integer.parseInt(entry.getValue().toString());
-
-            } else if (entry.getKey().equals("__largeur")){
-
-                largeur = Integer.parseInt(entry.getValue().toString());
-
-            } else if (entry.getKey().equals("__pourGagner")){
-
-                pourGagner = Integer.parseInt(entry.getValue().toString());
-
-            }
-
-        }
-
     }
 
     @Override
     public Map<String, Object> enObjectJson(){
 
-        Map<String, Object> objectJson = new HashMap<>();
-
-        objectJson.put( __hauteur, hauteur.toString());
-
-        objectJson.put( __largeur, largeur.toString());
-
-        objectJson.put( __pourGagner, pourGagner.toString());
-
-        return objectJson;
+        return null;
 
     }
 

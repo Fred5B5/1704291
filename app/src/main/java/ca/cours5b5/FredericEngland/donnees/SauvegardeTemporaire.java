@@ -34,6 +34,11 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
     }
 
     @Override
+    public void detruireSauvegarde(String cheminSauvegarde) {
+        bundle.remove(cheminSauvegarde);
+    }
+
+    @Override
     public void sauvegarderModele(String cheminSauvegarde, Map<String, Object> objetJson) {
         if(bundle != null){
 
@@ -42,5 +47,7 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
 
         }
     }
+
+
 
 }

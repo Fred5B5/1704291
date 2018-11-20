@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import ca.cours5b5.FredericEngland.controleurs.interfaces.Fournisseur;
+import ca.cours5b5.FredericEngland.donnees.Server;
 import ca.cours5b5.FredericEngland.donnees.SourceDeDonnees;
 import ca.cours5b5.FredericEngland.exceptions.ErreurModele;
 import ca.cours5b5.FredericEngland.modeles.MParametres;
@@ -13,6 +14,7 @@ import ca.cours5b5.FredericEngland.modeles.MParametresPartie;
 import ca.cours5b5.FredericEngland.modeles.MPartie;
 import ca.cours5b5.FredericEngland.modeles.Modele;
 import ca.cours5b5.FredericEngland.donnees.Disque;
+import ca.cours5b5.FredericEngland.usagers.UsagerCourant;
 
 public final class ControleurModeles {
 
@@ -30,6 +32,7 @@ public final class ControleurModeles {
 
         listeDeSauvegardes = new ArrayList<>();
         listeDeSauvegardes.add(Disque.getInstance());
+        listeDeSauvegardes.add(Server.getInstance());
 
     }
 
@@ -37,6 +40,10 @@ public final class ControleurModeles {
 
         ControleurModeles.sequenceDeChargement = sequenceDeChargement;
 
+    }
+
+    private static String getCheminSauvegarde(String nomModele){
+        return nomModele + '/' + UsagerCourant.getId();
     }
 
     public static void sauvegarderModeleDansCetteSource(String nomModele, SourceDeDonnees sourceDeDonnees) {
@@ -47,7 +54,7 @@ public final class ControleurModeles {
 
             Map<String, Object> objetJson = modele.enObjetJson();
 
-            sourceDeDonnees.sauvegarderModele(nomModele, objetJson);
+            sourceDeDonnees.sauvegarderModele(getCheminSauvegarde(nomModele), objetJson);
 
         }
     }

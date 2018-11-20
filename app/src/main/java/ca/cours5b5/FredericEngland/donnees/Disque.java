@@ -32,6 +32,12 @@ public final class Disque extends SourceDeDonnees {
     }
 
     @Override
+    public void detruireSauvegarde(String cheminSauvegarde) {
+        File file = getFichier(cheminSauvegarde);
+        file.delete();
+    }
+
+    @Override
     public Map<String, Object> chargerModele(String cheminSauvegarde) {
 
         File fichier = getFichier(cheminSauvegarde);
@@ -63,7 +69,6 @@ public final class Disque extends SourceDeDonnees {
         String json = Jsonification.enChaineJson(objetJson);
 
         try {
-
             OutputStream outputStream = new FileOutputStream(fichier);
 
             outputStream.write(json.getBytes());

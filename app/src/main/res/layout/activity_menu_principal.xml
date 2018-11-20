@@ -33,4 +33,40 @@
         app:layout_constraintEnd_toEndOf="@+id/bouton_parametres"
         app:layout_constraintStart_toStartOf="@+id/bouton_parametres"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_connection"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginLeft="136dp"
+        android:layout_marginRight="136dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/btn_connection"
+        app:layout_constraintBottom_toTopOf="@+id/bouton_partie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_deconnection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="127dp"
+        android:layout_marginLeft="128dp"
+        android:layout_marginRight="127dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/btn_deconnection"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/bouton_partie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="128dp" />
 </ca.cours5b5.FredericEngland.vues.VMenuPrincipal>

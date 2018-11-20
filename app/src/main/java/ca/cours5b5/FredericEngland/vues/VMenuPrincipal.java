@@ -24,6 +24,9 @@ public class VMenuPrincipal extends Vue {
     private Button boutonDeconnexion;
     private Action actionDeconnexion;
 
+    private Button boutonEnLigne;
+    private Action actionEnLigne;
+
     public VMenuPrincipal(Context context) {
         super(context);
     }
@@ -58,6 +61,8 @@ public class VMenuPrincipal extends Vue {
         boutonConnexion = findViewById(R.id.btn_connection);
         boutonDeconnexion = findViewById(R.id.btn_deconnection);
 
+        boutonEnLigne = findViewById(R.id.btn_jouerligne);
+
     }
 
     private void demanderActions() {
@@ -69,6 +74,8 @@ public class VMenuPrincipal extends Vue {
         actionConnexion =  ControleurAction.demanderAction(GCommande.CONNEXION);
         actionDeconnexion =  ControleurAction.demanderAction(GCommande.DECONNEXION);
 
+        actionEnLigne =  ControleurAction.demanderAction(GCommande.JOINDRE_OU_CREER_PARTIE_RESEAU);
+
     }
 
     private void installerListeners() {
@@ -79,6 +86,18 @@ public class VMenuPrincipal extends Vue {
 
         installerListenerConnexion();
         installerListenerDeconnexion();
+
+        installerListenerJouerEnLigne();
+
+    }
+
+    private void installerListenerJouerEnLigne() {
+        boutonEnLigne.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionEnLigne.executerDesQuePossible();
+            }
+        });
 
     }
 

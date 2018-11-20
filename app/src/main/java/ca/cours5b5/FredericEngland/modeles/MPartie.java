@@ -32,11 +32,8 @@ public class MPartie extends Modele implements Fournisseur {
         this.parametres = parametres;
 
         initialiser();
-
         initialiserCouleurCourante();
-
         initialiserGrille();
-
         fournirActionPlacerJeton();
 
     }
@@ -55,7 +52,7 @@ public class MPartie extends Modele implements Fournisseur {
     }
 
 
-    private void fournirActionPlacerJeton() {
+    protected void fournirActionPlacerJeton() {
 
         ControleurAction.fournirAction(this,
                 GCommande.JOUER_COUP_ICI,
@@ -65,14 +62,10 @@ public class MPartie extends Modele implements Fournisseur {
                         try{
 
                             int colonne = (Integer) args[0];
-
                             jouerCoup(colonne);
 
-
                         }catch(ClassCastException e){
-
                             throw new ErreurAction(e);
-
                         }
                     }
                 });
@@ -81,11 +74,8 @@ public class MPartie extends Modele implements Fournisseur {
     protected void jouerCoup(int colonne) {
 
         if(siCoupLegal(colonne)){
-
             listeCoups.add(colonne);
-
             grille.placerJeton(colonne, couleurCourante);
-
             prochaineCouleurCourante();
 
         }

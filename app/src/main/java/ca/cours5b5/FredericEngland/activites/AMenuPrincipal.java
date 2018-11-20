@@ -18,15 +18,18 @@ import ca.cours5b5.FredericEngland.controleurs.interfaces.Fournisseur;
 import ca.cours5b5.FredericEngland.controleurs.interfaces.ListenerFournisseur;
 import ca.cours5b5.FredericEngland.global.GCommande;
 import ca.cours5b5.FredericEngland.global.GConstantes;
+import ca.cours5b5.FredericEngland.modeles.MPartieReseau;
 import ca.cours5b5.FredericEngland.vues.VMenuPrincipal;
 
 public class AMenuPrincipal extends Activite implements Fournisseur {
 
-    private void connexion(){
+    private void seconnecter(){
+
         List<AuthUI.IdpConfig> fournisseursDeConnexion = new ArrayList<>();
         fournisseursDeConnexion.add(new AuthUI.IdpConfig.GoogleBuilder().build());
         fournisseursDeConnexion.add(new AuthUI.IdpConfig.EmailBuilder().build());
         fournisseursDeConnexion.add(new AuthUI.IdpConfig.PhoneBuilder().build());
+
         Intent intentionConnexion = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(fournisseursDeConnexion)
@@ -67,6 +70,27 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
 
         fournirActionConnexion();
         fournirActionDeconnexion();
+
+        fournirActionJoindreOuCreerPartieReseau();
+    }
+
+    private void fournirActionJoindreOuCreerPartieReseau() {
+        ControleurAction.fournirAction(this, GCommande.JOINDRE_OU_CREER_PARTIE_RESEAU,
+                new ListenerFournisseur() {
+
+                    @Override
+                    public void executer(Object... args) {
+                        transitionPartieReseau();
+                    }
+                });
+
+    }
+
+    private void transitionPartieReseau() {
+        Intent intentionPartieEnLigne = new Intent(this, APartieReseau.class);
+        intentionPartieEnLigne.putExtra(MPartieReseau.class.getSimpleName(), GConstantes.JSON_PARTIE_RESEAU);
+        startActivity(intentionPartieEnLigne);
+
     }
 
 
@@ -86,7 +110,7 @@ public class AMenuPrincipal extends Activite implements Fournisseur {
                 new ListenerFournisseur() {
                     @Override
                     public void executer(Object... args) {
-                        connexion();
+                        seconnecter();
                     }
                 });
     }

@@ -25,11 +25,13 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
     @Override
     public void chargerModele(final String cheminSauvegarde, final ListenerChargement listenerChargement) {
 
+        String cle = getCle(cheminSauvegarde);
+
         try {
 
-            if(bundle != null && bundle.containsKey(cheminSauvegarde)){
+            if(bundle != null && bundle.containsKey(cle)){
 
-                String json = bundle.getString(cheminSauvegarde);
+                String json = bundle.getString(cle);
 
                 Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
 
@@ -58,6 +60,11 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
         }
     }
 
+    private String getCle(String cheminSauvegarde){
 
+        String[] CheminSauvegarde = cheminSauvegarde.split("/");
+
+        return CheminSauvegarde[0];
+    }
 
 }

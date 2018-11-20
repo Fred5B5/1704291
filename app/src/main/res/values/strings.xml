@@ -23,4 +23,6 @@
     <string name="btn_connection">Connection</string>
     <string name="btn_deconnection">Deconnection</string>
 
+    <string name="btn_jouerligne">Jouer en ligne</string>
+
 </resources>

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ca.cours5b5.FredericEngland.controleurs.interfaces.Fournisseur;
 import ca.cours5b5.FredericEngland.controleurs.interfaces.ListenerChargement;
 import ca.cours5b5.FredericEngland.controleurs.interfaces.ListenerGetModele;
 import ca.cours5b5.FredericEngland.donnees.Server;

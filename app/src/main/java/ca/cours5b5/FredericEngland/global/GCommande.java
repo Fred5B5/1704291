@@ -18,5 +18,6 @@ public enum GCommande {
 
     JOINDRE_OU_CREER_PARTIE_RESEAU,
     RECEVOIR_COUP_RESEAU,
+    AFFICHAGE_SNACKBAR,
 
 }

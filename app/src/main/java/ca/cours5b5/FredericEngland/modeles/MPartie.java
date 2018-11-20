@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import ca.cours5b5.FredericEngland.controleurs.ControleurAction;
+import ca.cours5b5.FredericEngland.controleurs.ControleurPartie;
 import ca.cours5b5.FredericEngland.controleurs.interfaces.Fournisseur;
 import ca.cours5b5.FredericEngland.controleurs.interfaces.ListenerFournisseur;
 import ca.cours5b5.FredericEngland.exceptions.ErreurAction;
@@ -71,11 +72,18 @@ public class MPartie extends Modele implements Fournisseur {
                 });
     }
 
-    protected void jouerCoup(int colonne) {
+    protected void jouerCoup(int collonne) {
 
-        if(siCoupLegal(colonne)){
-            listeCoups.add(colonne);
-            grille.placerJeton(colonne, couleurCourante);
+        if(siCoupLegal(collonne)){
+            listeCoups.add(collonne);
+            grille.placerJeton(collonne, couleurCourante);
+
+            if(grille.siCouleurGagne(couleurCourante, parametres.getPourGagner())){
+
+                ControleurPartie.getInstance().gagnerPartie(couleurCourante);
+
+            }
+
             prochaineCouleurCourante();
 
         }

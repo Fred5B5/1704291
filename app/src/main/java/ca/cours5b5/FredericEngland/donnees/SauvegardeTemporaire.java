@@ -5,6 +5,8 @@ import android.os.Bundle;
 import java.util.Map;
 
 
+import ca.cours5b5.FredericEngland.controleurs.interfaces.ListenerChargement;
+import ca.cours5b5.FredericEngland.exceptions.ErreurModele;
 import ca.cours5b5.FredericEngland.serialisation.Jsonification;
 
 public class SauvegardeTemporaire extends SourceDeDonnees {
@@ -16,26 +18,34 @@ public class SauvegardeTemporaire extends SourceDeDonnees {
     }
 
     @Override
-    public Map<String, Object> chargerModele(String cheminSauvegarde) {
-
-        if(bundle != null && bundle.containsKey(cheminSauvegarde)){
-
-            String json = bundle.getString(cheminSauvegarde);
-
-            Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
-
-            return objetJson;
-
-        }else{
-
-            return null;
-
-        }
+    public void detruireSauvegarde(String cheminSauvegarde) {
+        bundle.remove(cheminSauvegarde);
     }
 
     @Override
-    public void detruireSauvegarde(String cheminSauvegarde) {
-        bundle.remove(cheminSauvegarde);
+    public void chargerModele(final String cheminSauvegarde, final ListenerChargement listenerChargement) {
+
+        try {
+
+            if(bundle != null && bundle.containsKey(cheminSauvegarde)){
+
+                String json = bundle.getString(cheminSauvegarde);
+
+                Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
+
+                listenerChargement.reagirSucces(objetJson);
+
+            }else{
+
+                listenerChargement.reagirErreur(new ErreurModele("Clé pas trouver"));
+
+            }
+
+        }catch (Exception ex){
+
+            listenerChargement.reagirErreur(ex);
+
+        }
     }
 
     @Override

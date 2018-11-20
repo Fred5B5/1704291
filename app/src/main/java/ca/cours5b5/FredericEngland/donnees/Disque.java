@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.Map;
 
+import ca.cours5b5.FredericEngland.controleurs.interfaces.ListenerChargement;
 import ca.cours5b5.FredericEngland.global.GConstantes;
 import ca.cours5b5.FredericEngland.serialisation.Jsonification;
 
@@ -38,7 +39,7 @@ public final class Disque extends SourceDeDonnees {
     }
 
     @Override
-    public Map<String, Object> chargerModele(String cheminSauvegarde) {
+    public void chargerModele(final String cheminSauvegarde, final ListenerChargement listenerChargement) {
 
         File fichier = getFichier(cheminSauvegarde);
 
@@ -48,15 +49,11 @@ public final class Disque extends SourceDeDonnees {
 
             Map<String, Object> objetJson = Jsonification.aPartirChaineJson(json);
 
-            return objetJson;
+            listenerChargement.reagirSucces(objetJson);
 
-        } catch (FileNotFoundException e) {
+        } catch (Exception e){
 
-            return null;
-
-        } catch (IOException e) {
-
-            return null;
+            listenerChargement.reagirErreur(e);
 
         }
     }

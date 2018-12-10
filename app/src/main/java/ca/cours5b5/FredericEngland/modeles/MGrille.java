@@ -1,17 +1,22 @@
 package ca.cours5b5.FredericEngland.modeles;
 
+import com.google.gson.internal.bind.ObjectTypeAdapter;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ca.cours5b5.FredericEngland.exceptions.ErreurSerialisation;
+import ca.cours5b5.FredericEngland.global.GCommande;
 import ca.cours5b5.FredericEngland.global.GCouleur;
 import ca.cours5b5.FredericEngland.global.GDirection;
-
+import ca.cours5b5.FredericEngland.serialisation.AttributSerialisable;
 
 public class MGrille extends Modele  {
 
     private List<MColonne> colonnes;
+
 
     public MGrille(int largeur){
 
@@ -20,6 +25,7 @@ public class MGrille extends Modele  {
         initialiserColonnes(largeur);
 
     }
+
 
     private void initialiserColonnes(int largeur) {
 
@@ -42,6 +48,7 @@ public class MGrille extends Modele  {
 
     }
 
+
     @Override
     public void aPartirObjetJson(Map<String, Object> objetJson) throws ErreurSerialisation {
 
@@ -49,102 +56,99 @@ public class MGrille extends Modele  {
 
     }
 
+
     @Override
-    public Map<String, Object> enObjetJson() throws ErreurSerialisation {
+    public Map<String, Object> enObjetJson()  {
 
         throw new UnsupportedOperationException();
 
     }
 
+
     public boolean siCouleurGagne(GCouleur couleur, int pourGagner){
 
-        boolean couleurGagne = false;
+        for(int idColonne = 0; idColonne < colonnes.size(); idColonne++){
 
-        for (int i = 0; i < colonnes.size(); i++){
+            if(siCouleurGagneCetteColonne(couleur, idColonne, pourGagner)){
 
-            if(siCouleurGagneCetteColonne(couleur, i, pourGagner)){
-
-                couleurGagne = true;
-
-                break;
+                return true;
 
             }
-
         }
 
-        return couleurGagne;
-
-    }
-
-    public boolean siCouleurGagneCetteCase(GCouleur couleur, int idColonne, int idRangee, int pourGagner){
-
-        boolean couleurGagne = false;
-
-        for (GDirection direction : GDirection.directions) {
-
-            if(siCouleurGagneDansCetteDirection(couleur,idColonne, idRangee, direction, pourGagner)){
-
-                couleurGagne = true;
-
-                break;
-
-            }
-
-        }
-
-        return couleurGagne;
-    }
-
-    public boolean siCouleurGagneDansCetteDirection(GCouleur couleur, int idColonne, int idRangee, GDirection direction, int pourGagner){
-        boolean couleurGagner = true;
-
-        for(int i = 0; i < pourGagner; i++){
-
-            int collone = i * direction.incrementHorizontal + idColonne;
-
-            int range = i * direction.incrementVertical + idRangee;
-
-            if(!siMemeCouleurCetteCase(couleur, collone, range)){
-
-                couleurGagner = false;
-
-                break;
-            }
-        }
-        return couleurGagner;
+        return false;
     }
 
 
-    public boolean siCouleurGagneCetteColonne(GCouleur couleur, int idColonne, int pourGagner){
-
-        boolean couleurGagne = false;
+    private boolean siCouleurGagneCetteColonne(GCouleur couleur, int idColonne, int pourGagner){
 
         MColonne colonne = colonnes.get(idColonne);
 
-        for (int i = 0; i < colonne.getJetons().size(); i++){
+        for(int idRangee = 0; idRangee <  colonne.getJetons().size(); idRangee++){
 
-            if(siCouleurGagneCetteCase(couleur, idColonne, i, pourGagner)){
+            if(siCouleurGagneCetteCase(couleur, idColonne, idRangee, pourGagner)){
 
-                couleurGagne = true;
+                return true;
 
-                break;
+            }
+
+        }
+
+        return false;
+    }
+
+
+    private boolean siCouleurGagneCetteCase(GCouleur couleur, int idColonne, int idRangee, int pourGagner) {
+            for(GDirection direction : GDirection.directions){
+                if(siCouleurGagneDansCetteDirection(couleur, idColonne, idRangee, direction, pourGagner)){
+
+                    return true;
+
+                }
+            }
+
+        return false;
+    }
+
+
+    private boolean siCouleurGagneDansCetteDirection(GCouleur couleur, int idColonne, int idRangee, GDirection direction, int pourGagner) {
+       if(pourGagner == 0){
+
+           return true;
+
+       }else if(siMemeCouleurCetteCase(couleur, idColonne, idRangee)){
+
+           int nouvelleColonne = idColonne + direction.incrementHorizontal;
+           int nouvelleRangee = idRangee + direction.incrementVertical;
+
+           int nouveauPourGagner = pourGagner - 1;
+
+           if(siCouleurGagneDansCetteDirection(couleur, nouvelleColonne, nouvelleRangee, direction, nouveauPourGagner)){
+
+               return true;
+           }
+
+       }
+
+       return false;
+    }
+
+
+    private boolean siMemeCouleurCetteCase(GCouleur couleur, int idColonne, int idRangee){
+
+        if(idColonne >= 0 && idColonne < colonnes.size()){
+
+            MColonne colonne = colonnes.get(idColonne);
+
+            if(idRangee >= 0 && idRangee < colonne.getJetons().size()){
+
+                return colonne.getJetons().get(idRangee).siMemeCouleur(couleur);
+
             }
         }
 
-        return couleurGagne;
+        return false;
     }
 
-    public boolean siMemeCouleurCetteCase(GCouleur couleur, int idColonne, int idRangee){
-
-        boolean memeCouleur = false;
-
-        if(idColonne < colonnes.size() && idColonne >= 0 && colonnes.get(idColonne).getJetons().size() > idRangee && idRangee >= 0){
-
-            memeCouleur = colonnes.get(idColonne).getJetons().get(idRangee) == couleur;
-
-        }
-
-        return memeCouleur;
-    }
 
 }

@@ -1,5 +1,8 @@
 package ca.cours5b5.FredericEngland.proxy;
 
+
+import android.util.Log;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,83 +21,138 @@ import ca.cours5b5.FredericEngland.global.GConstantes;
 public class ProxyListe extends Proxy implements Fournisseur {
 
     private ChildEventListener childEventListener;
+
     private Query requete;
+
     private Action actionNouvelItem;
+    private Action actionItemDetruit;
+
     private List<DatabaseReference> noeudsAjoutes;
 
     public ProxyListe(String cheminServeur) {
         super(cheminServeur);
+
         noeudsAjoutes = new ArrayList<>();
+
     }
+
 
     public void setActionNouvelItem(GCommande commande){
-        actionNouvelItem = ControleurAction.demanderAction(commande);
+
+        this.actionNouvelItem = ControleurAction.demanderAction(commande);
+
     }
+
+
+    public void setActionItemDetruit(GCommande commande){
+
+        this.actionItemDetruit = ControleurAction.demanderAction(commande);
+
+    }
+
 
     public void ajouterValeur(Object valeur) {
-        DatabaseReference node = super.noeudServeur.push();
-        node.setValue(valeur);
-        noeudsAjoutes.add(node);
+
+        DatabaseReference noeudAjoute = noeudServeur.push();
+
+        noeudAjoute.setValue(valeur);
+
+        noeudsAjoutes.add(noeudAjoute);
 
     }
+
 
     @Override
     public void connecterAuServeur(){
-
         super.connecterAuServeur();
 
         creerListener();
+
         requete = getRequete();
+
         requete.addChildEventListener(childEventListener);
 
     }
 
-    @Override
-    public void deconnecterDuServeur() {
-        super.deconnecterDuServeur();
-        requete.removeEventListener(childEventListener);
-    }
 
     private void creerListener(){
 
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                Object valeur = dataSnapshot.getValue();
+
                 if(actionNouvelItem != null){
-                    actionNouvelItem.setArguments(dataSnapshot.getValue());
+
+                    actionNouvelItem.setArguments(valeur);
+
                     actionNouvelItem.executerDesQuePossible();
 
                 }
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                Object valeur = dataSnapshot.getValue();
+
+                if(actionItemDetruit != null){
+
+                    actionItemDetruit.setArguments(valeur);
+
+                    actionItemDetruit.executerDesQuePossible();
+
+                }
+
             }
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
+
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         };
+    }
+
+
+    protected Query getRequete(){
+
+        return noeudServeur.orderByKey().limitToFirst(GConstantes.NOMBRE_DE_VALEURS_A_CHARGER_DU_SERVEUR_PAR_DEFAUT);
 
     }
+
+
+    @Override
+    public void deconnecterDuServeur() {
+
+        noeudServeur.removeEventListener(childEventListener);
+
+        noeudsAjoutes.clear();
+
+        super.deconnecterDuServeur();
+
+    }
+
 
     @Override
     public void detruireValeurs() {
 
-        for (DatabaseReference node: noeudsAjoutes) {
-            node.removeValue();
+        for(DatabaseReference noeud : noeudsAjoutes){
+            noeud.removeValue();
         }
     }
-
-    protected Query getRequete(){
-        return super.noeudServeur.orderByKey().limitToFirst(GConstantes.NOMBRE_DE_VALEURS_A_CHARGER_DU_SERVEUR_PAR_DEFAUT);
-    }
-
 
 
 }

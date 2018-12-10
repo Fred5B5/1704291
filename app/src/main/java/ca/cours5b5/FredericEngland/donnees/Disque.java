@@ -10,11 +10,12 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.Map;
 
-import ca.cours5b5.FredericEngland.controleurs.interfaces.ListenerChargement;
 import ca.cours5b5.FredericEngland.global.GConstantes;
 import ca.cours5b5.FredericEngland.serialisation.Jsonification;
 
 public final class Disque extends SourceDeDonnees {
+
+    private Disque(){}
 
     private static final Disque instance = new Disque();
 
@@ -24,22 +25,14 @@ public final class Disque extends SourceDeDonnees {
 
     private File repertoireRacine;
 
-    private Disque() {}
 
     public void setRepertoireRacine(File repertoireRacine) {
-
         this.repertoireRacine = repertoireRacine;
-
     }
 
-    @Override
-    public void detruireSauvegarde(String cheminSauvegarde) {
-        File file = getFichier(cheminSauvegarde);
-        file.delete();
-    }
 
     @Override
-    public void chargerModele(final String cheminSauvegarde, final ListenerChargement listenerChargement) {
+    public void chargerModele(String cheminSauvegarde, ListenerChargement listenerChargement) {
 
         File fichier = getFichier(cheminSauvegarde);
 
@@ -51,12 +44,13 @@ public final class Disque extends SourceDeDonnees {
 
             listenerChargement.reagirSucces(objetJson);
 
-        } catch (Exception e){
+        } catch (IOException e) {
 
             listenerChargement.reagirErreur(e);
 
         }
     }
+
 
     @Override
     public void sauvegarderModele(String cheminSauvegarde, Map<String, Object> objetJson) {
@@ -66,6 +60,7 @@ public final class Disque extends SourceDeDonnees {
         String json = Jsonification.enChaineJson(objetJson);
 
         try {
+
             OutputStream outputStream = new FileOutputStream(fichier);
 
             outputStream.write(json.getBytes());
@@ -78,13 +73,25 @@ public final class Disque extends SourceDeDonnees {
 
         } catch (IOException e) {
 
+
             Log.d("Atelier07", "IOException: " + cheminSauvegarde);
 
         }
     }
 
 
-    private File getFichier(String nomModele) {
+    @Override
+    public void detruireSauvegarde(String cheminSauvegarde) {
+
+        File fichier = getFichier(cheminSauvegarde);
+        fichier.delete();
+
+    }
+
+
+    private File getFichier(String cheminSauvegarde) {
+
+        String nomModele = getNomModele(cheminSauvegarde);
 
         String nomFichier = getNomFichier(nomModele);
 
@@ -92,10 +99,12 @@ public final class Disque extends SourceDeDonnees {
 
     }
 
+
     private String getNomFichier(String nomModele) {
 
         return nomModele + GConstantes.EXTENSION_PAR_DEFAUT;
 
     }
+
 
 }

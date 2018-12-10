@@ -5,23 +5,29 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public abstract class Proxy {
 
-    private String chemin;
+    private String cheminServeur;
 
     protected DatabaseReference noeudServeur;
 
-    public Proxy(String cheminServeur){ this.chemin = cheminServeur; }
+    public Proxy(String cheminServeur){
+        this.cheminServeur = cheminServeur;
+    }
 
+    public void connecterAuServeur(){
+
+        noeudServeur = FirebaseDatabase.getInstance().getReference(cheminServeur);
+
+    }
 
     public void deconnecterDuServeur(){
         noeudServeur = null;
-        detruireValeurs();
+    }
 
+    protected boolean siConnecte(){
+        return noeudServeur != null;
     }
 
     public abstract void detruireValeurs();
 
-    public void connecterAuServeur(){
-        noeudServeur = FirebaseDatabase.getInstance().getReference(chemin);
-    }
 
 }

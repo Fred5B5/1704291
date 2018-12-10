@@ -1,23 +1,31 @@
 package ca.cours5b5.FredericEngland.controleurs;
 
+
+import android.util.Log;
+
 import ca.cours5b5.FredericEngland.global.GCommande;
 import ca.cours5b5.FredericEngland.global.GCouleur;
 
-public class ControleurPartie {
-
-    private static final ControleurPartie instance = new ControleurPartie();
+public final class ControleurPartie {
 
     private ControleurPartie(){}
 
-    public void gagnerPartie(GCouleur couleurGagnant){
+    private static final ControleurPartie instance = new ControleurPartie();
+    public static ControleurPartie getInstance(){return instance;}
 
-        Action actionAfficherGagnant = ControleurAction.demanderAction(GCommande.AFFICHAGE_SNACKBAR);
+    public void gagnerPartie(GCouleur couleurGagnante){
 
-        actionAfficherGagnant.setArguments(couleurGagnant);
+        Action actionTerminerPartie = ControleurAction.demanderAction(GCommande.TERMINER_PARTIE);
 
-        actionAfficherGagnant.executerDesQuePossible();
+        Action actionAfficherMessage = ControleurAction.demanderAction(GCommande.AFFICHER_MESSAGE_GAGNANT);
+
+
+        actionAfficherMessage.setArguments(couleurGagnante,
+                actionTerminerPartie);
+
+        actionAfficherMessage.executerDesQuePossible();
 
     }
 
-    public static ControleurPartie getInstance(){ return instance; }
+
 }
